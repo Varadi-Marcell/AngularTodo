@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Modal</h4>
+  <button type="button" class="close pull-right btn btn-outline-danger btn-sm" aria-label="Close"
+          (click)="modalRef.hide()">
+    X
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+
+    <h3><label class="col-form-label ">Title </label></h3>
+    <input type="text" id="title" class="form-control"
+           formControlName="title" required>
+
+    <div *ngIf="todoForm.controls?.['title'].invalid &&
+                todoForm.controls?.['description'].touched"
+         class="text-danger">
+      Title is empty!
+    </div>
+
+    <h3><label class="col-form-label">Description</label></h3>
+    <textarea id="description" class="form-control" rows="4" cols="50" formControlName="description"
+              required></textarea>
+    <div *ngIf="todoForm.controls?.['description'].invalid &&
+                todoForm.controls?.['description'].touched"
+         class="text-danger">
+      Description is empty!
+    </div>
+    <button
+      type="button"
+      class="btn btn-dark opacity-75 form-control mt-3"
+      (click)="onSubmit()"
+    >
+      Create Todo
+    </button>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+</div>

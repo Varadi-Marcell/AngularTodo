@@ -1,0 +1,137 @@
+<div class="container-fluid my-3">
+  <div class="p-5">
+    <div class="h3">Switch view</div>
+    <i [ngClass]="viewMode === 'list' ? 'active-view' : ''" class="btn bi bi-list p-3 bg-light-subtle shadow-lg"
+       (click)="setViewMode('list')"></i>
+    <i [ngClass]="viewMode === 'grid' ? 'active-view' : ''" class="btn bi bi-grid p-3 bg-light-subtle shadow-lg"
+       (click)="setViewMode('grid')"></i>
+
+  </div>
+
+  <div class="row gx-5" *ngIf="viewMode === 'grid'">
+    <div class="p-5">
+      <button type="button" class="btn btn-success bi-plus  " (click)="createTodo()">Create Todo</button>
+      <button type="button" (click)="sortItemsByDate()" class="btn-info btn bi-sort-alpha-down">Sort by date</button>
+    </div>
+    <div class="col px-md-5"
+         (dragover)="onDragOver($event)"
+         (drop)="onDropBack()">
+
+      <h2>In Progress:</h2>
+
+      <div class="row gap-3">
+        <div *ngFor="let item of items"
+             draggable="true"
+             (dragstart)="onDragStart($event, item)"
+             class="col-md-5 bg-light card border-0 p-5 text-center shadow-lg rounded-4 my-4 gap-md-2">
+          <div class="text-end pb-3">
+            <i (click)="viewTodo(item)" class="bg-warning rounded-3 btn bi-eye p-3 me-1"></i>
+            <i (click)="deleteItem(item)" class="bg-danger rounded-3 bi-trash btn p-3 me-1"></i>
+            <i (click)="updateTodo(item)" class="bg-primary rounded-3 bi-pencil btn p-3"></i>
+          </div>
+          <div class="h2">{{item.title}}</div>
+          <div class=" truncate-text">
+            {{item.description}}
+          </div>
+          <div class="text-start">
+            Created:{{item.date | date:'yyyy-MM-dd HH:mm'}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col px-md-5"
+         (dragover)="onDragOver($event)"
+         (drop)="onDrop()">
+      <h2>Done:</h2>
+      <div class="row gap-3">
+        <div *ngFor="let item of doneItems"
+             draggable="true"
+             (dragstart)="onDragStart($event, item)"
+
+             class="col-md-5 bg-light card border-0 p-5 text-center shadow-lg rounded-4 my-4 gap-md-2">
+          <div class="text-end pb-3">
+            <i (click)="viewTodo(item)" class="bg-warning rounded-3 btn bi-eye p-3 me-1"></i>
+            <i (click)="deleteItem(item)" class="bg-danger rounded-3 bi-trash btn p-3 me-1"></i>
+            <i (click)="updateTodo(item)" class="bg-primary rounded-3 bi-pencil btn p-3"></i>
+          </div>
+          <div class="h2">{{item.title}}</div>
+          <div class=" truncate-text">
+            {{item.description}}
+          </div>
+          <div class="text-start">
+            Created:{{item.date | date:'yyyy-MM-dd HH:mm'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row gx-5" *ngIf="viewMode === 'list'">
+    <div class="p-5">
+      <button type="button" class="btn btn-success bi-plus  " (click)="createTodo()">Create Todo</button>
+      <button type="button" (click)="sortItemsByDate()" class="btn-info btn bi-sort-alpha-down">Sort by date</button>
+
+    </div>
+    <div class="col px-md-5"
+         (dragover)="onDragOver($event)"
+         (drop)="onDropBack()">
+
+      <h2>In Progress:</h2>
+      <div *ngFor="let item of items"
+           draggable="true"
+           (dragstart)="onDragStart($event, item)"
+           class="bg-light card border-0 p-5 text-center shadow-lg rounded-4 my-3">
+
+
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4 h2">{{item.title}}</div>
+          <div class="col-4">
+            <i (click)="viewTodo(item)" class="bg-warning rounded-3 btn bi-eye p-3 me-1"></i>
+            <button (click)="deleteItem(item)" class="bg-danger rounded-3 bi-trash btn btn-sm p-3 me-1"></button>
+            <i (click)="updateTodo(item)" class="bg-primary rounded-3 bi-pencil btn p-3"></i>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col truncate-text">
+            {{item.description}}
+          </div>
+          <div class="text-start">
+            Created:{{item.date | date:'yyyy-MM-dd HH:mm'}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col"
+         (dragover)="onDragOver($event)"
+         (drop)="onDrop()">
+      <h2>Done:</h2>
+      <div *ngFor="let item of doneItems"
+           draggable="true"
+           (dragstart)="onDragStart($event, item)"
+
+           class="bg-light card border-0 p-5 text-center shadow-lg rounded-4 my-3">
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4 h2">{{item.title}}</div>
+          <div class="col-4">
+            <i (click)="viewTodo(item)" class="bg-warning rounded-3 btn bi-eye p-3 me-1"></i>
+            <button (click)="deleteItem(item)" class="bg-danger rounded-3 bi-trash btn btn-sm p-3 me-1"></button>
+            <i (click)="updateTodo(item)" class="bg-primary rounded-3 bi-pencil btn p-3"></i>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col truncate-text">
+            {{item.description}}
+          </div>
+          <div class="text-start">
+            Created:{{item.date | date:'yyyy-MM-dd HH:mm'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

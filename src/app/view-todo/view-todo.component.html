@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Modal</h4>
+  <button type="button" class="close pull-right btn btn-outline-danger btn-sm" aria-label="Close"
+          (click)="modalRef.hide()">
+    X
+  </button>
+</div>
+<div class="modal-body">
+
+  <h3><label class="col-form-label ">Title </label></h3>
+  <div class="form-control" id="title" [textContent]="item.title"></div>
+
+  <h3><label class="col-form-label">Description</label></h3>
+  <textarea disabled class="form-control" id="description" rows="4" cols="50" [textContent]="item.description"></textarea>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+</div>
